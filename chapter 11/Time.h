@@ -6,8 +6,8 @@ struct Time {
     int hour, minute, second;
     
     //constructors 
-    Time(int, int, int);
-    Time(int);
+    Time(int hour, int minute, int second);    
+    Time(int seconds);
     Time();
     //functions
     string toString();
