@@ -29,3 +29,15 @@ TEST_CASE("Test can add BigInts") {
     CHECK((i1 + i3).to_string() == "43333");
 }
 
+TEST_CASE("test can compare bigints for <") {
+    BigInt i1("12345");
+    BigInt i2("54321");
+    BigInt i3("123456");
+    BigInt i4("-654321");
+    BigInt i5("54321");
+    BigInt i6("-54321");
+    CHECK((i1 < i1) == false);
+    CHECK((i1 < i3) == true);
+    CHECK((i2 < i1) == true);
+    CHECK((i2 < i5) == false);
+}
