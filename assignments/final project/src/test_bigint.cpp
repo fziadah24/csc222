@@ -18,3 +18,14 @@ TEST_CASE("Test can create and render BigInts") {
     BigInt bi5("-923456789012345678901234567890");
     CHECK(bi5.to_string() == "-923456789012345678901234567890");
 }
+
+TEST_CASE("Test can add BigInts") {
+    BigInt i1("123");
+    BigInt i2("321");
+    BigInt i3("43210");
+    BigInt i4("9999");
+    BigInt i5("1");
+    CHECK((i1 + i2).to_string() == "444");
+    CHECK((i1 + i3).to_string() == "43333");
+}
+
