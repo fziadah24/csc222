@@ -49,6 +49,12 @@ BigInt::BigInt(string n)
     }
 }
 
+bool BigInt::operator==(const BigInt&) const;
+bool BigInt::operator>(const BigInt&) const;
+bool BigInt::operator<(const BigInt&) const;
+bool BigInt::operator!=(const BigInt&) const;
+
+
 string BigInt::to_string() const
 {
     return negative ? "-" + digits : digits;
