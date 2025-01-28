@@ -2,6 +2,7 @@
 #include <doctest.h>
 #include <string>
 #include "bigint.h" 
+
 TEST_CASE("Test can create and render BigInts") {
     BigInt bi;
     CHECK(bi.to_string() == "0");
