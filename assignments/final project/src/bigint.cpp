@@ -26,6 +26,36 @@ string add_strings(const string& a, const string& b) {
             return a.compare(b);
 }
 
+string subtract_strings(const string& a, const string& b) {
+    string result;
+    int borrow = 0;
+    int i = a.size() - 1, j = b.size() - 1;
+
+    while (i >= 0) {
+        int sub = (a[i] - '0') - (j >= 0 ? (b[j] - '0') : 0) - borrow;
+        if (sub < 0) {
+            sub += 10;
+            borrow = 1;
+        } else {
+            borrow = 0;
+        }
+        result.push_back(sub + '0');
+        i--; j--;
+    }
+
+    while (result.size() > 1 && result.back() == '0') {
+        result.pop_back();
+    }
+
+    reverse(result.begin(), result.end());
+    return result;
+}
+
+int compare_strings(const string& a, const string& b) {
+    if (a.size() != b.size()) return a.size() < b.size() ? -1 : 1;
+    return a.compare(b);
+}
+
 BigInt::BigInt() : negative(false), digits("0") {}
 BigInt::BigInt(int i) : negative(i < 0), digits(std::to_string(abs(i))) {}
 
@@ -65,4 +95,17 @@ BigInt::BigInt(string n) {
 
 string BigInt::to_string() const {
     return negative ? "-" + digits : digits;
+}
+
+BigInt BigInt::operator+(const BigInt& other) const {
+    if (negative == other.negative) {
+        return BigInt((negative ? "-" : "") + add_strings(digits, other.digits));
+    }
+    
+    // If signs are different, determine which number is larger
+    if (compare_strings(digits, other.digits) >= 0) {
+        return BigInt((negative ? "-" : "") + subtract_strings(digits, other.digits));
+    } else {
+        return BigInt((other.negative ? "-" : "") + subtract_strings(other.digits, digits));
+    }
 }
